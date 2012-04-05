@@ -6,6 +6,8 @@ public class Main
     {
     	Teste t = new Teste();
     	System.out.println("VINICIUS AMIGO");
+    	System.out.println("TESESSSSSSSSSSSSSSSSSSSSSSSSSSS");
+    	
     	t.playSound("/Show do Milhão/wav/Certa.wav");
     }
 }
