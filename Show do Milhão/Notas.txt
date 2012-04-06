@@ -1,0 +1,25 @@
+Show do Milhão
+---------------
+
+1ª Rodada	2ª Rodada	3ª Rodada     Final 
+     1000		10000	   100000	1000000
+     2000		20000	   200000
+     3000		30000	   300000
+     4000		40000	   400000
+     5000		50000	   500000
+  
+ - Cada pergunta tem 4 alternativas, 40 segundos para responder.
+ - Matérias: Espanhol, Matemática, Geografia, História, Português, Ciências, Inglês e Variedades.
+ - 4 tipos de ajudas: Universitários, Cartas, Placas e Pulo.
+   - Universitários: 3 universitários que opinam.
+   - Cartas: 4 cartas, que podem ser K, 1, 2 ou 3, sendo que cada uma remove um certo número de alternativas erradas.
+   - Placas: Várias pessoas levantam placas opinando. Pode ser em % ou N.
+   - Pulo: Pula pra outra pergunta de mesmo valor. O jogador possui 3 pulos.   
+ - Só pode usar 1 ajuda por pergunta.
+ - 1 milhão = errar perde tudo, não vale ajudas.
+ - Fim do Tempo: Dá ao jogador mais 5 segundos e daí conta como erro.
+ - Pede por confirmação quando o usuário clica em parar ou numa alternativa.
+ - Fórmular do dinheiro: 
+   - Acertar: ValorPergunta
+   - Parar: ValorPerguntaAnterior
+   - Errar: ValorPerguntaAnterior/2

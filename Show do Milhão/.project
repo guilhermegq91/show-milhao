@@ -14,11 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>wav</name>
-			<type>2</type>
-			<location>I:/Trabalho GA Redes I/Resources/wav</location>
-		</link>
-	</linkedResources>
 </projectDescription>
