@@ -1,36 +1,50 @@
 package pckCommon;
 
-public class OpcaoPergunta {
+public class OpcaoPergunta
+{
 	int id;
 	String descricao;
 	boolean verdadeira;
 	
-	public OpcaoPergunta(String descricao, boolean verdadeira){
+	public OpcaoPergunta(int id, String descricao, boolean verdadeira)
+	{
+		this.id = id;
 		this.descricao = descricao;
 		this.verdadeira = verdadeira;
 	}
 
-	public int getId() {
+	public int getId()
+	{
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(int id)
+	{
 		this.id = id;
 	}
 
-	public String getDescricao() {
+	public String getDescricao()
+	{
 		return descricao;
 	}
 
-	public void setDescricao(String descricao) {
+	public void setDescricao(String descricao)
+	{
 		this.descricao = descricao;
 	}
 
-	public boolean getVerdadeira() {
+	public boolean getVerdadeira()
+	{
 		return verdadeira;
 	}
 
-	public void setVerdadeira(boolean verdadeira) {
+	public void setVerdadeira(boolean verdadeira)
+	{
 		this.verdadeira = verdadeira;
+	}
+	
+	public String toString()
+	{
+		return getDescricao();
 	}
 }

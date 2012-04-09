@@ -1,5 +1,6 @@
 package pckCommon;
 
-public enum NivelPergunta {
+public enum NivelPergunta
+{
 	FACIL, MEDIO, DIFICIL;
 }
