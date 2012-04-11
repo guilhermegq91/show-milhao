@@ -4,7 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
+import pckCommon.Pergunta;
 
 public class frmClient extends JFrame {
 	
@@ -17,6 +25,7 @@ public class frmClient extends JFrame {
 	JButton btnResponde;
 	JButton btnPula;
 	
+	JLabel lblMsg;
 	JTextArea texPergunta;
 
 	public frmClient(){
@@ -38,6 +47,8 @@ public class frmClient extends JFrame {
 		btnResponde = new JButton("Responder");
 		btnPula = new JButton("Pular");
 		btnPula.setEnabled(false);
+		
+		lblMsg = new JLabel("Olá! O Jogo está iniciando! BOA SORTE!!!!");
 		
 		texPergunta = new JTextArea();
 		texPergunta.setText("OLA");
@@ -62,7 +73,7 @@ public class frmClient extends JFrame {
 		//pnlPergunta.add(texPerunta);
 		texPergunta.setBounds(0, 0, 600, 500);
 		
-		pnlNorth.add(new JLabel(" Vamos para a pergunta que vale 10.000 reais"));
+		pnlNorth.add(lblMsg);
 		JScrollPane scroll = new JScrollPane(texPergunta);
 		//scroll.setBounds(0, 0, 600, 600);
 		//scroll.setAutoscrolls(true);
@@ -76,9 +87,24 @@ public class frmClient extends JFrame {
 		pnlCenter.add(new JRadioButton("Oção D"));
 		
 		this.add(pnlNorth, BorderLayout.NORTH);		
-		this.add(new JPanel(), BorderLayout.WEST);
+		this.add(new JPanel(), BorderLayout.WEST); //para os radiobuttons não ficarem colados a esquerda
 		this.add(pnlCenter, BorderLayout.CENTER);
 		this.add(pnlSouth, BorderLayout.SOUTH);
+	}
+	
+	private void setEventosObjetos(){
+		
+		
+	}
+	
+	private void limpaFrame(){
+		this.lblMsg.setText("");
+		this.texPergunta.setText("");
+	}
+
+	private void loadPergunta(Pergunta pergunta){
+		lblMsg.setText(pergunta.getMensagem());
+		texPergunta.setText(pergunta.getDescricao());
 	}
 	
 	public static void main(String args[]){

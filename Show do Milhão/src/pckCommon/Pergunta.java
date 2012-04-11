@@ -2,11 +2,12 @@ package pckCommon;
 
 public class Pergunta
 {
-	int id;
-	String descricao;
-	NivelPergunta nivel;
-	OpcaoPergunta[] opcoes; //array de opcoes
-	int resposta;
+	private int id;
+	private String descricao;
+	private NivelPergunta nivel;
+	private OpcaoPergunta[] opcoes; //array de opcoes
+	private int resposta;
+	private String mensagem;
 
 	public Pergunta(int id, String descricao, OpcaoPergunta[] opcoes, int resposta, NivelPergunta nivel)
 	{
@@ -65,5 +66,13 @@ public class Pergunta
 	public void setOpcoes(OpcaoPergunta[] opcoes)
 	{
 		this.opcoes = opcoes;
+	}
+	
+	public String getMensagem(){
+		return mensagem;
+	}
+	
+	public void setMensagem(String mensagem){
+		this.mensagem = mensagem;
 	}
 }
