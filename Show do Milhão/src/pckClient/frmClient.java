@@ -28,7 +28,7 @@ public class frmClient extends JFrame {
 	
 	private void criaObjetos(){
 		pnlNorth   = new JPanel(new GridLayout(3,0));
-		pnlCenter  = new JPanel();
+		pnlCenter  = new JPanel(new GridLayout(4,0));
 		pnlSouth   = new JPanel();
 		pnlToolbar = new JPanel(new GridLayout(0,4));//vai ficar dentro do pnlNorth
 		((GridLayout)pnlToolbar.getLayout()).setHgap(1); //margem horizontal entre objetos	
@@ -70,9 +70,15 @@ public class frmClient extends JFrame {
 		pnlNorth.add(scroll);
 		pnlNorth.add(pnlToolbar);
 		
-		this.add("North" , pnlNorth);
-		this.add("Center", pnlCenter);
-		this.add("South" , pnlSouth);
+		pnlCenter.add(new JRadioButton("Oção A"));
+		pnlCenter.add(new JRadioButton("Oção B"));
+		pnlCenter.add(new JRadioButton("Oção C"));
+		pnlCenter.add(new JRadioButton("Oção D"));
+		
+		this.add(pnlNorth, BorderLayout.NORTH);		
+		this.add(new JPanel(), BorderLayout.WEST);
+		this.add(pnlCenter, BorderLayout.CENTER);
+		this.add(pnlSouth, BorderLayout.SOUTH);
 	}
 	
 	public static void main(String args[]){
