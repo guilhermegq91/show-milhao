@@ -6,6 +6,8 @@ public class OpcaoPergunta
 	String descricao;
 	boolean verdadeira;
 	
+	boolean teste;
+	
 	public OpcaoPergunta(int id, String descricao, boolean verdadeira)
 	{
 		this.id = id;
