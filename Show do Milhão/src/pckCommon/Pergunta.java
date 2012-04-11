@@ -6,26 +6,14 @@ public class Pergunta
 	private String descricao;
 	private NivelPergunta nivel;
 	private OpcaoPergunta[] opcoes; //array de opcoes
-	private int resposta;
 	private String mensagem;
 
-	public Pergunta(int id, String descricao, OpcaoPergunta[] opcoes, int resposta, NivelPergunta nivel)
+	public Pergunta(int id, String descricao, OpcaoPergunta[] opcoes, NivelPergunta nivel)
 	{
 		this.id			= id;
 		this.descricao	= descricao;
 		this.opcoes		= opcoes;
-		this.resposta	= resposta;
 		this.nivel		= nivel;
-	}
-
-	public int getResposta()
-	{
-		return resposta;
-	}
-
-	public void setResposta(int resposta)
-	{
-		this.resposta = resposta;
 	}
 
 	public int getId()
