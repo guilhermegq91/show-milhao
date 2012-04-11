@@ -12,16 +12,15 @@ public class ProcessaPerguntas
 	public static void main(String args[])
 	{
 		ProcessaPerguntas p = new ProcessaPerguntas();
-		ArrayList<Pergunta> a = p.ProcessaCSV(new File("Resources/Perguntas Difíceis.csv"));
+		ArrayList<Pergunta> a = p.ProcessaCSV(new File("Resources/Perguntas.csv"));
 		
 		for(int i = 0; i < a.size(); i++)
-			System.out.println(a.get(i).getId() + " \t| " + 
-								a.get(i).getDescricao() + " \t| " + 
-								a.get(i).getOpcoes()[0] + " \t| " + 
-								a.get(i).getOpcoes()[1] + " \t| " + 
-								a.get(i).getOpcoes()[2] + " \t| " + 
-								a.get(i).getOpcoes()[3] + " \t| " + 
-								a.get(i).getNivel());
+			System.out.println(a.get(i).getId() + " | " + a.get(i).getNivel() + " | " +
+								a.get(i).getDescricao() + " \n " + 
+								a.get(i).getOpcoes()[0] + " | " + 
+								a.get(i).getOpcoes()[1] + " | " + 
+								a.get(i).getOpcoes()[2] + " | " + 
+								a.get(i).getOpcoes()[3] + " | ");
 	}
 	
 	public ArrayList<Pergunta> ProcessaCSV(File arquivo)
