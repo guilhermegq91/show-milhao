@@ -13,7 +13,7 @@ public class Som
 {	
 	public static synchronized void tocar(String som)
 	{
-		File arquivo = new File(som);
+		File arquivo = new File("Resources/wav/" + som);
 		
 		// O AudioListener serve pra esperar o arquivo de som tocar inteiro
 		// Sem ele, o playback é cortado.
