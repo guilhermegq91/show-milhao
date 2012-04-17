@@ -1,15 +1,15 @@
 package pckCommon;
 
-public class Pergunta
+public class Pergunta extends BasePergResp
 {
 	private int id;
 	private String descricao;
 	private NivelPergunta nivel;
-	private OpcaoPergunta[] opcoes; //array de opcoes
-	private String mensagem;
+	private OpcaoPergunta[] opcoes; //array de opcoes	
 
-	public Pergunta(int id, String descricao, OpcaoPergunta[] opcoes, NivelPergunta nivel)
+	public Pergunta(String msg, int id, String descricao, OpcaoPergunta[] opcoes, NivelPergunta nivel)
 	{
+		super(msg);
 		this.id			= id;
 		this.descricao	= descricao;
 		this.opcoes		= opcoes;
@@ -54,13 +54,5 @@ public class Pergunta
 	public void setOpcoes(OpcaoPergunta[] opcoes)
 	{
 		this.opcoes = opcoes;
-	}
-	
-	public String getMensagem(){
-		return mensagem;
-	}
-	
-	public void setMensagem(String mensagem){
-		this.mensagem = mensagem;
-	}
+	}	
 }
