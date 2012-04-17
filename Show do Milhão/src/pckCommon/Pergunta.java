@@ -10,10 +10,10 @@ public class Pergunta extends BasePergResp
 	public Pergunta(String msg, int id, String descricao, OpcaoPergunta[] opcoes, NivelPergunta nivel)
 	{
 		super(msg);
-		this.id			= id;
-		this.descricao	= descricao;
-		this.opcoes		= opcoes;
-		this.nivel		= nivel;
+		this.id		   = id;
+		this.descricao = descricao;
+		this.opcoes	   = opcoes;
+		this.nivel	   = nivel;
 	}
 
 	public int getId()
