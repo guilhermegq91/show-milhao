@@ -46,7 +46,7 @@ public class frmClient extends javax.swing.JFrame {
         jMenuSobre = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Show do Milhão - Client");
+        setTitle("Show do Milhï¿½o - Client");
         setName("frmClient"); // NOI18N
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -57,7 +57,7 @@ public class frmClient extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 255));
-        jLabel1.setText("Jogo Show do Milhão");
+        jLabel1.setText("Jogo Show do Milhï¿½o");
 
         jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Vinicius\\Desktop\\logo.jpg")); // NOI18N
 
@@ -130,6 +130,12 @@ public class frmClient extends javax.swing.JFrame {
 
         jMenuItemNovoJogo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
         jMenuItemNovoJogo.setText("Iniciar novo jogo");
+        jMenuItemNovoJogo.addActionListener(new java.awt.event.ActionListener() {
+        	public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemNovoJogoActionPerformed(evt);
+            }
+        });
+        
         jMenuArquivo.add(jMenuItemNovoJogo);
         jMenuArquivo.add(jSeparator1);
 
@@ -179,6 +185,12 @@ public class frmClient extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setLocationRelativeTo(null);  
     }//GEN-LAST:event_centralizaFrame
+    
+    private void jMenuItemNovoJogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFecharActionPerformed
+        // Inicia um novo Jogo
+    	Cliente c = new Cliente();
+    	c.iniciaJogo();
+    }
 
     /**
      * @param args the command line arguments

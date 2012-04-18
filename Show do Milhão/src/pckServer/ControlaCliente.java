@@ -1,7 +1,10 @@
 package pckServer;
 
+
+import java.io.ObjectInputStream;
 import java.net.*;
 import java.util.*;
+import pckCommon.*;
 
 public class ControlaCliente implements Runnable {
 
@@ -13,13 +16,22 @@ public class ControlaCliente implements Runnable {
 	
 	public void run() {
 		
+		Resposta r;
+		
 		// Controla o Jogo
 		try {
-			Scanner s = new Scanner (this.cliente.getInputStream());
-				
-			while (s.hasNextLine()) {
-				System.out.println(s.nextLine());
+			
+			ObjectInputStream input = new ObjectInputStream(cliente.getInputStream());
+	        r = (Resposta) input.readObject();
+
+			// Verifica o que o cliente enviou
+			switch( r.getId() ) {
+				case 0:
+					System.out.println("Enviar primeira pergunta");
+				break;
 			}
+			
+			// Instancia 
 			
 		}catch(Exception IOException){
 			System.out.println("Erro " + IOException.getMessage());
