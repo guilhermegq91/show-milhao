@@ -54,5 +54,16 @@ public class Pergunta extends BasePergResp
 	public void setOpcoes(OpcaoPergunta[] opcoes)
 	{
 		this.opcoes = opcoes;
-	}	
+	}
+	
+	@Override
+	public String toString()
+	{	
+		String texto = getDescricao() + "\n| ";
+		
+		for(int i = 0; i < getOpcoes().length; i++)
+			texto += "(" + (i + 1) + ") " + getOpcoes()[i] + " | ";
+		
+		return texto;
+	}
 }

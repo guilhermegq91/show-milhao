@@ -30,9 +30,9 @@ public class CadastroPerguntas
 
 		p.ImportaCSV( new File("Resources/Perguntas.csv") );
 		
-		p.imprimeLista(p.getPerguntaFacil());
-		p.imprimeLista(p.getPerguntaMedio());
-		p.imprimeLista(p.getPerguntaDificil());
+		p.imprimeLista( p.getPerguntaFacil() );
+		p.imprimeLista( p.getPerguntaMedio() );
+		p.imprimeLista( p.getPerguntaDificil() );
 	}
 	
 	public CadastroPerguntas(ArrayList<Pergunta> perguntaFacil, ArrayList<Pergunta> perguntaMedio, ArrayList<Pergunta> perguntaDificil)
