@@ -79,11 +79,11 @@ public class ProcessaPerguntas
 				opcoes[3] = new OpcaoPergunta(3, dados[OPCAO4], 3 == Integer.valueOf(dados[RESPOSTA]) );		
 
 				if ( dados[DIFICULDADE].toCharArray()[0] == 'F')
-					perguntaFacil.add(new Pergunta(i, dados[PERGUNTA], opcoes, NivelPergunta.FACIL));
+					perguntaFacil.add(new Pergunta("", i, dados[PERGUNTA], opcoes, NivelPergunta.FACIL));
 				else if ( dados[DIFICULDADE].toCharArray()[0] == 'M')
-					perguntaMedio.add(new Pergunta(i, dados[PERGUNTA], opcoes, NivelPergunta.MEDIO));
+					perguntaMedio.add(new Pergunta("", i, dados[PERGUNTA], opcoes, NivelPergunta.MEDIO));
 				else if ( dados[DIFICULDADE].toCharArray()[0] == 'D')
-					perguntaDificil.add(new Pergunta(i, dados[PERGUNTA], opcoes, NivelPergunta.DIFICIL));							
+					perguntaDificil.add(new Pergunta("", i, dados[PERGUNTA], opcoes, NivelPergunta.DIFICIL));							
 				
 				i++;
 			}
