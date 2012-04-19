@@ -25,7 +25,7 @@ public class Jogo
 		
 		double valorAcertar, valorParar, valorErrar;
 		
-		int nrPergunta = 1;
+		int nrPergunta = 10;
 		while(true)
 		{
 			if (nrPergunta <= 5)
@@ -59,9 +59,14 @@ public class Jogo
 			else
 				j.venceu();
 			
-			valorAcertar = Math.pow(10, (int)(nrPergunta / 5) + 3) * (   nrPergunta           );
-			valorParar	 = Math.pow(10, (int)(nrPergunta / 5) + 3) * (   nrPergunta - 1       );
-			valorErrar	 = Math.pow(10, (int)(nrPergunta / 5) + 3) * ( ( nrPergunta - 1 ) / 2 );
+			/*   - Acertar: ValorPergunta
+				   - Parar: ValorPerguntaAnterior
+				   - Errar: ValorPerguntaAnterior/2
+		    */
+			
+			valorAcertar = Math.pow(10, Math.ceil(nrPergunta / 5) + 2) * (   Math.ceil(nrPergunta / 5)           );
+			valorParar	 = Math.pow(10, Math.ceil(nrPergunta / 5) + 2) * (   Math.ceil(nrPergunta / 5) - 1       );
+			valorErrar	 = Math.pow(10, Math.ceil(nrPergunta / 5) + 2) * ( ( Math.ceil(nrPergunta / 5) - 1 ) / 2 );
 			Som.tocar("Question/" + (int)valorAcertar + ".wav");
 			
 			System.out.println(p + " (5) PULAR |");
