@@ -70,7 +70,7 @@ public class CadastroPerguntas
 			default      : return null;
 		}		
 		
-		int numRand = getNumRandom(listaPergSolicitada.size());
+		int numRand = getNumRandom(listaPergSolicitada.size() - 1);
 		Pergunta perguntaSorteada = getPergunta(listaPergSolicitada, numRand);
 		listaPergSolicitada.remove(numRand);
 		
@@ -93,10 +93,10 @@ public class CadastroPerguntas
 				dados = linha.split(";");			
 				
 				opcoes = new OpcaoPergunta[4];
-				opcoes[0] = new OpcaoPergunta(0, dados[OPCAO1], 0 == Integer.valueOf(dados[RESPOSTA]) );
-				opcoes[1] = new OpcaoPergunta(1, dados[OPCAO2], 1 == Integer.valueOf(dados[RESPOSTA]) );
-				opcoes[2] = new OpcaoPergunta(2, dados[OPCAO3], 2 == Integer.valueOf(dados[RESPOSTA]) );
-				opcoes[3] = new OpcaoPergunta(3, dados[OPCAO4], 3 == Integer.valueOf(dados[RESPOSTA]) );		
+				opcoes[0] = new OpcaoPergunta(0, dados[OPCAO1], 1 == Integer.valueOf(dados[RESPOSTA]) );
+				opcoes[1] = new OpcaoPergunta(1, dados[OPCAO2], 2 == Integer.valueOf(dados[RESPOSTA]) );
+				opcoes[2] = new OpcaoPergunta(2, dados[OPCAO3], 3 == Integer.valueOf(dados[RESPOSTA]) );
+				opcoes[3] = new OpcaoPergunta(3, dados[OPCAO4], 4 == Integer.valueOf(dados[RESPOSTA]) );		
 
 				if ( dados[DIFICULDADE].toCharArray()[0] == 'F')
 					getPerguntaFacil().add(new Pergunta("", i, dados[PERGUNTA], opcoes, NivelPergunta.FACIL));
