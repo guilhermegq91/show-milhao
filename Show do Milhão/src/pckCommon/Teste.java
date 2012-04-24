@@ -1,5 +1,7 @@
 package pckCommon;
 
+import pckClient.Som;
+
 public class Teste {
 
 	/**

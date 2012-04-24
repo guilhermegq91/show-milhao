@@ -21,25 +21,20 @@ public class CadastroPerguntas
 	private ArrayList<Pergunta> perguntaDificil;
 	
 	public static void main(String args[])
-	{
-		ArrayList<Pergunta> perguntaFacil	= new ArrayList<Pergunta>();
-		ArrayList<Pergunta> perguntaMedio	= new ArrayList<Pergunta>();
-		ArrayList<Pergunta> perguntaDificil	= new ArrayList<Pergunta>();
-		
-		CadastroPerguntas p = new CadastroPerguntas(perguntaFacil, perguntaMedio, perguntaDificil);
-
-		p.ImportaCSV( new File("Resources/Perguntas.csv") );
-		
+	{	
+		CadastroPerguntas p = new CadastroPerguntas("Resources/Perguntas.csv");		
 		p.imprimeLista( p.getPerguntaFacil() );
 		p.imprimeLista( p.getPerguntaMedio() );
 		p.imprimeLista( p.getPerguntaDificil() );
 	}
 	
-	public CadastroPerguntas(ArrayList<Pergunta> perguntaFacil, ArrayList<Pergunta> perguntaMedio, ArrayList<Pergunta> perguntaDificil)
+	public CadastroPerguntas(String arquivoCSV)
 	{
-		this.perguntaFacil	 = perguntaFacil;
-		this.perguntaMedio	 = perguntaMedio;
-		this.perguntaDificil = perguntaDificil;
+		ArrayList<Pergunta> perguntaFacil	= new ArrayList<Pergunta>();
+		ArrayList<Pergunta> perguntaMedio	= new ArrayList<Pergunta>();
+		ArrayList<Pergunta> perguntaDificil	= new ArrayList<Pergunta>();
+
+		this.ImportaCSV(new File(arquivoCSV));
 	}
 	
 	private int getNumRandom(int maximo)
@@ -77,7 +72,7 @@ public class CadastroPerguntas
 		return perguntaSorteada;		
 	}
 	
-	public void ImportaCSV(File arquivo)
+	private void ImportaCSV(File arquivo)
 	{
 		String[] dados = null;
 		OpcaoPergunta[] opcoes = null;
@@ -127,29 +122,14 @@ public class CadastroPerguntas
 		return perguntaFacil;
 	}
 
-	public void setPerguntaFacil(ArrayList<Pergunta> perguntaFacil)
-	{
-		this.perguntaFacil = perguntaFacil;
-	}
-
 	public ArrayList<Pergunta> getPerguntaMedio()
 	{
 		return perguntaMedio;
 	}
 
-	public void setPerguntaMedio(ArrayList<Pergunta> perguntaMedio)
-	{
-		this.perguntaMedio = perguntaMedio;
-	}
-
 	public ArrayList<Pergunta> getPerguntaDificil()
 	{
 		return perguntaDificil;
-	}
-
-	public void setPerguntaDificil(ArrayList<Pergunta> perguntaDificil)
-	{
-		this.perguntaDificil = perguntaDificil;
 	}
 
 	public void imprimeLista(ArrayList<Pergunta> lista)

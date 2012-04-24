@@ -3,8 +3,18 @@ package pckCommon;
 import java.io.File;
 import java.util.ArrayList;
 
+import pckClient.Som;
+
 public class Jogo
 {
+
+	String nomeJogador;
+	int contPerguntas;
+	double vlrUltPergunta;
+    CadastroPerguntas perguntas;
+	
+	
+	
 	public static void main(String args[])
 	{
 		Jogo j = new Jogo();

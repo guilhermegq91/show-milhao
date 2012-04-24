@@ -1,4 +1,4 @@
-package pckCommon;
+package pckClient;
 
 import java.io.File;
 
