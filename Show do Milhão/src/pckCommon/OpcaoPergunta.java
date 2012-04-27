@@ -2,11 +2,9 @@ package pckCommon;
 
 public class OpcaoPergunta
 {
-	int id;
-	String descricao;
-	boolean verdadeira;
-	
-	boolean teste;
+	private int id;
+	private String descricao;
+	private boolean verdadeira;
 	
 	public OpcaoPergunta(int id, String descricao, boolean verdadeira)
 	{

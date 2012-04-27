@@ -5,7 +5,10 @@ public class Pergunta extends BasePergResp
 	private int id;
 	private String descricao;
 	private NivelPergunta nivel;
-	private OpcaoPergunta[] opcoes; //array de opcoes	
+	private OpcaoPergunta[] opcoes; //array de opcoes    
+	private double valorAcertar;
+	private double valorParar;
+	private double valorErrar;
 
 	public Pergunta(String msg, int id, String descricao, OpcaoPergunta[] opcoes, NivelPergunta nivel)
 	{
@@ -14,6 +17,9 @@ public class Pergunta extends BasePergResp
 		this.descricao = descricao;
 		this.opcoes	   = opcoes;
 		this.nivel	   = nivel;
+		this.valorAcertar = 0;
+		this.valorErrar   = 0;
+		this.valorParar   = 0;
 	}
 
 	public int getId()
@@ -56,6 +62,31 @@ public class Pergunta extends BasePergResp
 		this.opcoes = opcoes;
 	}
 	
+		
+	public double getValorAcertar() {
+		return valorAcertar;
+	}
+
+	public void setValorAcertar(double valorAcertar) {
+		this.valorAcertar = valorAcertar;
+	}
+
+	public double getValorParar() {
+		return valorParar;
+	}
+
+	public void setValorParar(double valorParar) {
+		this.valorParar = valorParar;
+	}
+
+	public double getValorErrar() {
+		return valorErrar;
+	}
+
+	public void setValorErrar(double valorErrar) {
+		this.valorErrar = valorErrar;
+	}
+
 	@Override
 	public String toString()
 	{	

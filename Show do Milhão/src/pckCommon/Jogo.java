@@ -8,11 +8,65 @@ import pckClient.Som;
 public class Jogo
 {
 
-	String nomeJogador;
-	int contPerguntas;
-	double vlrUltPergunta;
-    CadastroPerguntas perguntas;
+	private String nomeJogador;
+	private String ipJogador;
+	private int contPerguntas;
+	private double vlrUltPergunta;
+	private CadastroPerguntas perguntas;
 	
+	public Jogo(String nomeJogador, String ipJogador)
+	{
+		//carrega a lista de perguntos deste jogo
+		this.perguntas = new CadastroPerguntas("Resources/Perguntas.csv");
+		this.nomeJogador = nomeJogador;
+		this.ipJogador = ipJogador;
+		this.contPerguntas = 0;
+		this.vlrUltPergunta = 0;
+	}
+	
+	public String getNomeJogador() {
+		return nomeJogador;
+	}
+
+	public void setNomeJogador(String nomeJogador) {
+		this.nomeJogador = nomeJogador;
+	}
+
+	public String getIpJogador() {
+		return ipJogador;
+	}
+
+	public void setIpJogador(String ipJogador) {
+		this.ipJogador = ipJogador;
+	}
+
+	public Pergunta proximaPergunta()
+	{
+		perguntas.sorteiaPergunta()
+		return null;
+	}
+	
+	//-----------------------------------------------------------------------------
+	//testes
+	//-----------------------------------------------------------------------------
+	public void venceu()
+	{
+		Som.tocar("UmMilhao.wav");
+		System.out.println("Você venceu.");
+		encerra();
+	}
+	
+	public void perdeu()
+	{
+		System.out.println("Você perdeu.");
+		encerra();
+	}
+	
+	public void encerra()
+	{
+		Som.tocar("Fim.wav");
+		System.exit(0);
+	}
 	
 	
 	public static void main(String args[])
@@ -43,7 +97,7 @@ public class Jogo
 				if (nrPergunta == 1)
 					Som.tocar("Rodada1.wav");
 				
-				p = perguntas.SorteiaPergunta(NivelPergunta.FACIL);
+				p = perguntas.sorteiaPergunta(NivelPergunta.FACIL);
 			}
 			
 			else if (nrPergunta <= 10)
@@ -51,7 +105,7 @@ public class Jogo
 				if (nrPergunta == 6)
 					Som.tocar("Rodada2.wav");
 				
-				p = perguntas.SorteiaPergunta(NivelPergunta.MEDIO);	
+				p = perguntas.sorteiaPergunta(NivelPergunta.MEDIO);	
 			}
 							
 			
@@ -60,11 +114,11 @@ public class Jogo
 				if (nrPergunta == 11)
 					Som.tocar("Rodada3.wav");
 				
-				p = perguntas.SorteiaPergunta(NivelPergunta.DIFICIL);
+				p = perguntas.sorteiaPergunta(NivelPergunta.DIFICIL);
 			}
 
 			else if (nrPergunta == 16 )
-				p = perguntas.SorteiaPergunta(NivelPergunta.DIFICIL);
+				p = perguntas.sorteiaPergunta(NivelPergunta.DIFICIL);
 
 			else
 				j.venceu();
@@ -107,24 +161,4 @@ public class Jogo
 			}
 		}
 	}
-
-	public void venceu()
-	{
-		Som.tocar("UmMilhao.wav");
-		System.out.println("Você venceu.");
-		encerra();
-	}
-	
-	public void perdeu()
-	{
-		System.out.println("Você perdeu.");
-		encerra();
-	}
-	
-	public void encerra()
-	{
-		Som.tocar("Fim.wav");
-		System.exit(0);
-	}
-
 }

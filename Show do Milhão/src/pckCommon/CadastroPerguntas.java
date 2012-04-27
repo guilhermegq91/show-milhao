@@ -30,24 +30,27 @@ public class CadastroPerguntas
 	
 	public CadastroPerguntas(String arquivoCSV)
 	{
-		ArrayList<Pergunta> perguntaFacil	= new ArrayList<Pergunta>();
-		ArrayList<Pergunta> perguntaMedio	= new ArrayList<Pergunta>();
-		ArrayList<Pergunta> perguntaDificil	= new ArrayList<Pergunta>();
+		perguntaFacil	= new ArrayList<Pergunta>();
+		perguntaMedio	= new ArrayList<Pergunta>();
+		perguntaDificil	= new ArrayList<Pergunta>();
 
 		this.ImportaCSV(new File(arquivoCSV));
 	}
 	
+	//usado apenas dentro da classe para sortear um numero randomico
 	private int getNumRandom(int maximo)
 	{
 		return (1 + (int)(Math.random() * maximo)); 
 	}
 	
+	//usado apenas dentro desta classe para obter a pergunta de acordo com o index sorteado
 	private Pergunta getPergunta(ArrayList<Pergunta> listaPerguntas, int numero)
 	{
 		return listaPerguntas.get(numero);
 	}
 	
-	public Pergunta SorteiaPergunta(NivelPergunta nivel)
+	//retorna a pergunta sorteada
+	public Pergunta sorteiaPergunta(NivelPergunta nivel)
 	{
 		ArrayList<Pergunta> listaPergSolicitada;
 	
@@ -72,6 +75,48 @@ public class CadastroPerguntas
 		return perguntaSorteada;		
 	}
 	
+	private Pergunta getPerguntaById(int id)
+	{
+		for(int i=0;i<perguntaFacil.size();i++)
+		{
+			if(perguntaFacil.get(i).getId() == id)
+				return perguntaFacil.get(i);
+		}
+		for(int i=0;i<perguntaMedio.size();i++)
+		{
+			if(perguntaMedio.get(i).getId() == id)
+				return perguntaMedio.get(i);
+		}		
+		for(int i=0;i<perguntaDificil.size();i++)
+		{
+			if(perguntaDificil.get(i).getId() == id)
+				return perguntaDificil.get(i);
+		}		
+		return null; //	só chega até aqui se não localizar a pergunta nas listas
+	}
+	
+	private OpcaoPergunta getOpcaoPerguntaById(Pergunta pergunta, int idOpcao)
+	{
+		if(pergunta != null)
+		{
+			for(int i=0;i<pergunta.getOpcoes().length;i++){
+				if(pergunta.getOpcoes()[i].getId() == idOpcao)
+					return pergunta.getOpcoes()[i];
+			}
+		}
+		return null; //só chega aqui se não localizar opção
+	}
+	
+	public boolean verifResposta(int idPergunta, int idOpcao)
+	{
+		OpcaoPergunta opcao = getOpcaoPerguntaById(getPerguntaById(idPergunta), idOpcao);
+		if(opcao != null)
+		{
+			return opcao.getVerdadeira();
+		}		
+		return false;
+	}
+	
 	private void ImportaCSV(File arquivo)
 	{
 		String[] dados = null;
@@ -83,6 +128,7 @@ public class CadastroPerguntas
 			
 			int i = 0;			
 			String linha = null;
+			//cada pergunta terá um ID unico, independente de qual lista ela esta			
 			while((linha = in.readLine()) != null)
 			{
 				dados = linha.split(";");			
@@ -101,16 +147,13 @@ public class CadastroPerguntas
 					getPerguntaDificil().add(new Pergunta("", i, dados[PERGUNTA], opcoes, NivelPergunta.DIFICIL));							
 				
 				i++;
-			}
-			
+			}	
 			in.close();
-		}
-		 
+		}		 
 		catch ( NumberFormatException e)
 		{
 			System.out.println("Erro na conversão de " + dados[5] + " para um valor numérico. \nHá erros na formatação do arquivo de perguntas.");
-		}
-		
+		}		
 		catch (IOException e)
 		{
 			e.printStackTrace();
@@ -143,6 +186,5 @@ public class CadastroPerguntas
 							   "(2) " + lista.get(i).getOpcoes()[1]	+ " | " + 
 							   "(3) " + lista.get(i).getOpcoes()[2]	+ " | " + 
 							   "(4) " + lista.get(i).getOpcoes()[3]	+ " | ");		
-	}
-	
+	}	
 }
