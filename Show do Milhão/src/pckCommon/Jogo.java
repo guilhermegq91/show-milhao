@@ -20,7 +20,7 @@ public class Jogo
 		this.perguntas = new CadastroPerguntas("Resources/Perguntas.csv");
 		this.nomeJogador = nomeJogador;
 		this.ipJogador = ipJogador;
-		this.contPerguntas = 0;
+		this.contPerguntas = 1;
 		this.vlrUltPergunta = 0;
 	}
 	
@@ -41,9 +41,11 @@ public class Jogo
 	}
 
 	public Pergunta proximaPergunta()
-	{
-		perguntas.sorteiaPergunta()
-		return null;
+	{	
+		double valorAcertar, valorParar, valorErrar;
+		perguntas.sorteiaPergunta(NivelPergunta.FACIL);
+		contPerguntas++;
+		return null;		
 	}
 	
 	//-----------------------------------------------------------------------------
