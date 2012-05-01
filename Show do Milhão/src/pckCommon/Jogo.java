@@ -48,6 +48,11 @@ public class Jogo
 		return null;		
 	}
 	
+	public void analisaMsgRecebida(Mensagem mensagem)
+	{
+		
+	}
+	
 	//-----------------------------------------------------------------------------
 	//testes
 	//-----------------------------------------------------------------------------
@@ -73,7 +78,7 @@ public class Jogo
 	
 	public static void main(String args[])
 	{
-		Jogo j = new Jogo();
+		Jogo j = new Jogo("vini", "127.0.0.1");
 		
 		Teclado t = new Teclado();
 		
@@ -81,8 +86,8 @@ public class Jogo
 		ArrayList<Pergunta> perguntaMedio	= new ArrayList<Pergunta>();
 		ArrayList<Pergunta> perguntaDificil	= new ArrayList<Pergunta>();
 		
-		CadastroPerguntas perguntas = new CadastroPerguntas(perguntaFacil, perguntaMedio, perguntaDificil);
-		perguntas.ImportaCSV( new File("Resources/Perguntas.csv") );
+		CadastroPerguntas perguntas = new CadastroPerguntas("Resources/Perguntas.csv");
+		//perguntas.ImportaCSV( new File("Resources/Perguntas.csv") );
 		
 		System.out.println("Bem vindo\n");
 				

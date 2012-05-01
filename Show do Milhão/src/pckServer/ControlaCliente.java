@@ -16,16 +16,16 @@ public class ControlaCliente implements Runnable {
 	
 	public void run() {
 		
-		Resposta r;
+		Mensagem m;
 		
 		// Controla o Jogo
 		try {
 			
 			ObjectInputStream input = new ObjectInputStream(cliente.getInputStream());
-	        r = (Resposta) input.readObject();
+	        m = (Mensagem) input.readObject();
 
 			// Verifica o que o cliente enviou
-			switch( r.getId() ) {
+			switch( m.getId() ) {
 				case 0:
 					System.out.println("Enviar primeira pergunta");
 				break;
