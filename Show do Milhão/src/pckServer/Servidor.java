@@ -8,10 +8,14 @@ public class Servidor
 {	
 	public static void main(String args[]) throws IOException
 	{
-		new Servidor(6789).start();
+		String porta = javax.swing.JOptionPane.showInputDialog("Informe a porta para o servidor");
+		
+		if ( porta != null ) {
+			new Servidor(Integer.valueOf(porta)).start();
+		}
 	}
 	
-	// Porta onde o servidor escutará
+	// Porta onde o servidor escutarï¿½
 	private int porta; 
 	
 	public Servidor (int porta)
@@ -31,9 +35,9 @@ public class Servidor
 			{
 				Socket cliente = servidor.accept();
 				
-				System.out.println("Nova conexão de: " + cliente.getInetAddress().getHostAddress());
+				System.out.println("Nova conexï¿½o de: " + cliente.getInetAddress().getHostAddress());
 				
-				// Lança o cliente para a thread, liberando o fluxo
+				// Lanï¿½a o cliente para a thread, liberando o fluxo
 				ControlaCliente cc = new ControlaCliente(cliente);
 				new Thread(cc).start();
 			}
