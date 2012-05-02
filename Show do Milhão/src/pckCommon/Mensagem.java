@@ -2,11 +2,21 @@ package pckCommon;
 
 import java.io.Serializable;
 
-public class Mensagem implements Serializable
-{
+public class Mensagem implements Serializable{
+	
 	private BasePergResp obj;
 	private String msg;
 	private String remetente;
+	
+	public Mensagem(String msg) {
+		this.msg = msg;
+	}
+	
+	public Mensagem(String msg, String remetente)
+	{
+		this.msg = msg;
+		this.remetente = remetente;
+	}
 	
 	public Mensagem(BasePergResp obj, String msg)
 	{
@@ -34,13 +44,11 @@ public class Mensagem implements Serializable
 		this.msg = msg;
 	}
 
-	public String getRemetente()
-	{
+	public String getRemetente() {
 		return remetente;
 	}
 
-	public void setRemetente(String remetente)
-	{
+	public void setRemetente(String remetente) {
 		this.remetente = remetente;
 	}
 	

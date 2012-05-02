@@ -1,6 +1,8 @@
 package pckCommon;
 
-public class OpcaoPergunta
+import java.io.Serializable;
+
+public class OpcaoPergunta implements Serializable
 {
 	private int id;
 	private String descricao;

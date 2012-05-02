@@ -1,14 +1,17 @@
 package pckCommon;
 
+import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import pckClient.Som;
 
-public class Jogo
+public class Jogo implements Serializable
 {
+
 	private String nomeJogador;
 	private String ipJogador;
-	private int contPerguntas;
+	private int contPerguntas = 0;
 	private double vlrUltPergunta;
 	private CadastroPerguntas perguntas;
 	
@@ -18,45 +21,80 @@ public class Jogo
 		this.perguntas = new CadastroPerguntas("Resources/Perguntas.csv");
 		this.nomeJogador = nomeJogador;
 		this.ipJogador = ipJogador;
-		this.contPerguntas = 1;
+		this.contPerguntas = 0;
 		this.vlrUltPergunta = 0;
 	}
 	
-	public String getNomeJogador()
-	{
+	public String getNomeJogador() {
 		return nomeJogador;
 	}
 
-	public void setNomeJogador(String nomeJogador)
-	{
+	public void setNomeJogador(String nomeJogador) {
 		this.nomeJogador = nomeJogador;
 	}
 
-	public String getIpJogador()
-	{
+	public String getIpJogador() {
 		return ipJogador;
 	}
 
-	public void setIpJogador(String ipJogador)
-	{
+	public void setIpJogador(String ipJogador) {
 		this.ipJogador = ipJogador;
 	}
 
 	public Pergunta proximaPergunta()
 	{	
 		double valorAcertar, valorParar, valorErrar;
-		
-		perguntas.sorteiaPergunta(NivelPergunta.FACIL);
 		contPerguntas++;
+
+		Pergunta p = perguntas.sorteiaPergunta(NivelPergunta.FACIL);
 		
-		return null;		
+		valorAcertar = this.getValorAcertar(contPerguntas);
+		valorParar	 = this.getValorAcertar(contPerguntas-1);
+		valorParar   = ( valorParar < 0 ) ? 0 : valorParar;
+		valorErrar	 = this.getValorAcertar(contPerguntas-1);
+		valorErrar	 = ( valorParar < 0 ) ? 0 : valorErrar;
+
+		p.setContPergunta(contPerguntas);
+		p.setValorAcertar(valorAcertar);
+		p.setValorErrar(valorErrar);
+		p.setValorParar(valorParar);
+		return p;		
 	}
+	
+	public double getValorAcertar(int pergunta) {
+		double valor = 0;
+		if (pergunta == 1) valor = 1000;
+		else if (pergunta == 2) valor = 2000;
+		else if (pergunta == 3) valor = 3000;
+		else if (pergunta == 4) valor = 4000;
+		else if (pergunta == 5) valor = 5000;
+		// Segunda rodada
+		else if (pergunta == 6) valor = 10000;
+		else if (pergunta == 7) valor = 20000;
+		else if (pergunta == 8) valor = 30000;
+		else if (pergunta == 9) valor = 40000;
+		else if (pergunta == 10) valor = 50000;
+		// Terceira rodada
+		else if (pergunta == 11) valor = 100000;
+		else if (pergunta == 12) valor = 200000;
+		else if (pergunta == 13) valor = 300000;
+		else if (pergunta == 14) valor = 400000;
+		else if (pergunta == 15) valor = 500000;
+		// Final
+		else if (pergunta == 16) valor = 1000000;
+		return valor;
+	}
+		
+	
 	
 	public void analisaMsgRecebida(Mensagem mensagem)
 	{
 		
 	}
 	
+	//-----------------------------------------------------------------------------
+	//testes
+	//-----------------------------------------------------------------------------
 	public void venceu()
 	{
 		Som.tocar("UmMilhao.wav");
@@ -75,6 +113,7 @@ public class Jogo
 		Som.tocar("Fim.wav");
 		System.exit(0);
 	}
+	
 	
 	public static void main(String args[])
 	{
@@ -145,7 +184,7 @@ public class Jogo
 			System.out.println("ACERTAR: " + valorAcertar + " PARAR: " + valorParar + " ERRAR: " + valorErrar);
 			
 			
-			alternativa = t.leInt("\nDigite o número correspondente à alternativa desejada.");
+			alternativa = t.leInt("\nDigite o número correspondente a alternativa desejada.");
 			
 			if ( alternativa == 5 )
 			{

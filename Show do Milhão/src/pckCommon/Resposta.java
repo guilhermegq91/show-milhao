@@ -1,9 +1,16 @@
 package pckCommon;
 
-public class Resposta extends BasePergResp{
+import java.io.Serializable;
+
+public class Resposta extends BasePergResp implements Serializable{
 	int id;
 	int id_pergunta;
 	int id_opcaoEscolhida;
+	
+	public Resposta(String msg, int id_opcaoEscolhida) {
+		super(msg);
+		this.id_opcaoEscolhida = id_opcaoEscolhida;
+	}
 	
 	public Resposta(String msg, int id, int id_pergunta, int id_opcaoEscolhida){
 		super(msg);

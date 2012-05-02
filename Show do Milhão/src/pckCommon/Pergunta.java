@@ -1,6 +1,8 @@
 package pckCommon;
 
-public class Pergunta extends BasePergResp
+import java.io.Serializable;
+
+public class Pergunta extends BasePergResp implements Serializable
 {
 	private int id;
 	private String descricao;
@@ -9,6 +11,7 @@ public class Pergunta extends BasePergResp
 	private double valorAcertar;
 	private double valorParar;
 	private double valorErrar;
+	private int contPergunta;
 
 	public Pergunta(String msg, int id, String descricao, OpcaoPergunta[] opcoes, NivelPergunta nivel)
 	{
@@ -20,6 +23,14 @@ public class Pergunta extends BasePergResp
 		this.valorAcertar = 0;
 		this.valorErrar   = 0;
 		this.valorParar   = 0;
+	}
+
+	public int getContPergunta() {
+		return contPergunta;
+	}
+
+	public void setContPergunta(int contPergunta) {
+		this.contPergunta = contPergunta;
 	}
 
 	public int getId()
