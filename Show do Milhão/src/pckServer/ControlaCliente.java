@@ -35,14 +35,14 @@ public class ControlaCliente implements Runnable {
 	        m = (Mensagem) input.readObject();
 	        
 	        
-			// Verifica a ação a ser tomada
+			// Verifica a aï¿½ï¿½o a ser tomada
 	        if (m.getMsg().equals("inicia")) {
 	        		
 	        	// Inicia novo jogo instanciando nova classe (sobreescrevendo se necessario)
 	        	j = new Jogo( m.getRemetente()
 	        			    , clienteIn.getInetAddress().getHostAddress() );
 	        	
-	        	// Transmite próxima pergunta para o jogador (salva socket)
+	        	// Transmite prï¿½xima pergunta para o jogador (salva socket)
 	        	Socket c = new Socket(clienteIn.getInetAddress().getHostAddress()
 	        			             , 6777);
 	        	clienteOut = c;
@@ -82,8 +82,8 @@ public class ControlaCliente implements Runnable {
 	        	Resposta r = (Resposta) m.getObj();
 
 	        	// Verifica se acertou ou errou
-	        	//if ( p.getOpcoes()[r.getId_opcaoEscolhida()].getVerdadeira() ) {
-	        	if ( true ) {
+	        	if ( p.getOpcoes()[r.getId_opcaoEscolhida()].getVerdadeira() ) {
+	        	//if ( true ) {
 	        		
 	        		// Retorna acerto
 	        		out.writeObject( new Mensagem("Certa") );
@@ -91,7 +91,7 @@ public class ControlaCliente implements Runnable {
 	        		
 	        		if ( p.getContPergunta() < 16 ) { 
 		        		
-	        			// Sorteia próxima
+	        			// Sorteia prï¿½xima
 		        		p = j.proximaPergunta();
 		        		out.writeObject( new Mensagem(p, "pergunta") );
 		        		out.flush();
