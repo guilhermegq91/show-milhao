@@ -2,16 +2,16 @@ package pckCommon;
 
 import java.io.Serializable;
 
-public class Pergunta extends BasePergResp implements Serializable
+public class Pergunta extends ObjetoMensagem implements Serializable
 {
-	private int id;
-	private String descricao;
-	private NivelPergunta nivel;
-	private OpcaoPergunta[] opcoes; //array de opcoes    
-	private double valorAcertar;
-	private double valorParar;
-	private double valorErrar;
-	private int contPergunta;
+	private int             id;
+	private String          descricao;
+	private NivelPergunta   nivel;
+	private OpcaoPergunta[] opcoes; // Array de opções    
+	private double          valorAcertar;
+	private double          valorParar;
+	private double          valorErrar;
+	private int             contPergunta;
 
 	public Pergunta(String msg, int id, String descricao, OpcaoPergunta[] opcoes, NivelPergunta nivel)
 	{
@@ -25,11 +25,13 @@ public class Pergunta extends BasePergResp implements Serializable
 		this.valorParar   = 0;
 	}
 
-	public int getContPergunta() {
+	public int getContPergunta()
+	{
 		return contPergunta;
 	}
 
-	public void setContPergunta(int contPergunta) {
+	public void setContPergunta(int contPergunta)
+	{
 		this.contPergunta = contPergunta;
 	}
 
@@ -74,27 +76,33 @@ public class Pergunta extends BasePergResp implements Serializable
 	}
 	
 		
-	public double getValorAcertar() {
+	public double getValorAcertar()
+	{
 		return valorAcertar;
 	}
 
-	public void setValorAcertar(double valorAcertar) {
+	public void setValorAcertar(double valorAcertar)
+	{
 		this.valorAcertar = valorAcertar;
 	}
 
-	public double getValorParar() {
+	public double getValorParar()
+	{
 		return valorParar;
 	}
 
-	public void setValorParar(double valorParar) {
+	public void setValorParar(double valorParar)
+	{
 		this.valorParar = valorParar;
 	}
 
-	public double getValorErrar() {
+	public double getValorErrar()
+	{
 		return valorErrar;
 	}
 
-	public void setValorErrar(double valorErrar) {
+	public void setValorErrar(double valorErrar)
+	{
 		this.valorErrar = valorErrar;
 	}
 

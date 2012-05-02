@@ -6,20 +6,19 @@ import pckClient.Som;
 
 public class Jogo implements Serializable
 {
-
 	private String nomeJogador;
 	private String ipJogador;
 	private int contPerguntas = 0;
 	private double vlrUltPergunta;
-	private CadastroPerguntas perguntas;
+	private ListaPerguntas perguntas;
 	
 	public Jogo(String nomeJogador, String ipJogador)
 	{
-		//carrega a lista de perguntos deste jogo
-		this.perguntas = new CadastroPerguntas("Resources/Perguntas.csv");
-		this.nomeJogador = nomeJogador;
-		this.ipJogador = ipJogador;
-		this.contPerguntas = 0;
+		// Carrega a lista de perguntas deste jogo
+		this.perguntas      = new ListaPerguntas("Resources/Perguntas.csv");
+		this.nomeJogador    = nomeJogador;
+		this.ipJogador      = ipJogador;
+		this.contPerguntas  = 0;
 		this.vlrUltPergunta = 0;
 	}
 	

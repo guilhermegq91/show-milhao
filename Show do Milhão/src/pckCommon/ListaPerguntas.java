@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class CadastroPerguntas
+public class ListaPerguntas
 {
 	public static final int PERGUNTA	= 0;
 	public static final int OPCAO1		= 1;
@@ -22,13 +22,13 @@ public class CadastroPerguntas
 	
 	public static void main(String args[])
 	{	
-		CadastroPerguntas p = new CadastroPerguntas("Resources/Perguntas.csv");		
+		ListaPerguntas p = new ListaPerguntas("Resources/Perguntas.csv");		
 		p.imprimeLista( p.getPerguntaFacil() );
 		p.imprimeLista( p.getPerguntaMedio() );
 		p.imprimeLista( p.getPerguntaDificil() );
 	}
 	
-	public CadastroPerguntas(String arquivoCSV)
+	public ListaPerguntas(String arquivoCSV)
 	{
 		perguntaFacil	= new ArrayList<Pergunta>();
 		perguntaMedio	= new ArrayList<Pergunta>();
@@ -37,13 +37,13 @@ public class CadastroPerguntas
 		this.ImportaCSV(new File(arquivoCSV));
 	}
 	
-	//usado apenas dentro da classe para sortear um numero randomico
+	// Usado apenas dentro da classe para sortear um numero randomico
 	private int getNumRandom(int maximo)
 	{
 		return (1 + (int)(Math.random() * maximo)); 
 	}
 	
-	//usado apenas dentro desta classe para obter a pergunta de acordo com o index sorteado
+	// Usado apenas dentro desta classe para obter a pergunta de acordo com o index sorteado
 	private Pergunta getPergunta(ArrayList<Pergunta> listaPerguntas, int numero)
 	{
 		return listaPerguntas.get(numero);
@@ -110,10 +110,12 @@ public class CadastroPerguntas
 	public boolean verifResposta(int idPergunta, int idOpcao)
 	{
 		OpcaoPergunta opcao = getOpcaoPerguntaById(getPerguntaById(idPergunta), idOpcao);
+		
 		if(opcao != null)
 		{
 			return opcao.getVerdadeira();
 		}		
+		
 		return false;
 	}
 	
@@ -128,7 +130,8 @@ public class CadastroPerguntas
 			
 			int i = 0;			
 			String linha = null;
-			//cada pergunta terá um ID unico, independente de qual lista ela esta			
+			
+			// Cada pergunta terá um ID unico, independente de qual lista ela esta			
 			while((linha = in.readLine()) != null)
 			{
 				dados = linha.split(";");			
@@ -150,14 +153,9 @@ public class CadastroPerguntas
 			}	
 			in.close();
 		}		 
-		catch ( NumberFormatException e)
-		{
-			System.out.println("Erro na conversão de " + dados[5] + " para um valor numérico. \nHá erros na formatação do arquivo de perguntas.");
-		}		
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
+		
+		catch ( NumberFormatException e) {System.out.println("Erro na conversão de " + dados[5] + " para um valor numérico. \nHá erros na formatação do arquivo de perguntas."); }		
+		catch (IOException e){ e.printStackTrace(); }
 	}
 	
 	public ArrayList<Pergunta> getPerguntaFacil()
