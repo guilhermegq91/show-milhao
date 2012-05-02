@@ -1,13 +1,11 @@
 package pckCommon;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import pckClient.Som;
 
 public class Jogo
 {
-
 	private String nomeJogador;
 	private String ipJogador;
 	private int contPerguntas;
@@ -24,27 +22,33 @@ public class Jogo
 		this.vlrUltPergunta = 0;
 	}
 	
-	public String getNomeJogador() {
+	public String getNomeJogador()
+	{
 		return nomeJogador;
 	}
 
-	public void setNomeJogador(String nomeJogador) {
+	public void setNomeJogador(String nomeJogador)
+	{
 		this.nomeJogador = nomeJogador;
 	}
 
-	public String getIpJogador() {
+	public String getIpJogador()
+	{
 		return ipJogador;
 	}
 
-	public void setIpJogador(String ipJogador) {
+	public void setIpJogador(String ipJogador)
+	{
 		this.ipJogador = ipJogador;
 	}
 
 	public Pergunta proximaPergunta()
 	{	
 		double valorAcertar, valorParar, valorErrar;
+		
 		perguntas.sorteiaPergunta(NivelPergunta.FACIL);
 		contPerguntas++;
+		
 		return null;		
 	}
 	
@@ -53,9 +57,6 @@ public class Jogo
 		
 	}
 	
-	//-----------------------------------------------------------------------------
-	//testes
-	//-----------------------------------------------------------------------------
 	public void venceu()
 	{
 		Som.tocar("UmMilhao.wav");
@@ -74,7 +75,6 @@ public class Jogo
 		Som.tocar("Fim.wav");
 		System.exit(0);
 	}
-	
 	
 	public static void main(String args[])
 	{
