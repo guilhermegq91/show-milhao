@@ -417,7 +417,8 @@ public class frmClient extends javax.swing.JFrame
 	{
 		try
 		{
-			Socket c = new Socket("127.0.0.1", 6789);
+			String x = javax.swing.JOptionPane.showInputDialog("Informe o IP do servidor"); 
+			Socket c = new Socket(x, 6789);
 			clienteOut = c;
 			
 		}
