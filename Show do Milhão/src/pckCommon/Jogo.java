@@ -1,8 +1,6 @@
 package pckCommon;
 
-import java.io.File;
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import pckClient.Som;
 
@@ -61,40 +59,36 @@ public class Jogo implements Serializable
 		return p;		
 	}
 	
-	public double getValorAcertar(int pergunta) {
+	public double getValorAcertar(int pergunta)
+	{
 		double valor = 0;
+		
 		if (pergunta == 1) valor = 1000;
 		else if (pergunta == 2) valor = 2000;
 		else if (pergunta == 3) valor = 3000;
 		else if (pergunta == 4) valor = 4000;
 		else if (pergunta == 5) valor = 5000;
+		
 		// Segunda rodada
 		else if (pergunta == 6) valor = 10000;
 		else if (pergunta == 7) valor = 20000;
 		else if (pergunta == 8) valor = 30000;
 		else if (pergunta == 9) valor = 40000;
 		else if (pergunta == 10) valor = 50000;
+		
 		// Terceira rodada
 		else if (pergunta == 11) valor = 100000;
 		else if (pergunta == 12) valor = 200000;
 		else if (pergunta == 13) valor = 300000;
 		else if (pergunta == 14) valor = 400000;
 		else if (pergunta == 15) valor = 500000;
+		
 		// Final
 		else if (pergunta == 16) valor = 1000000;
+		
 		return valor;
 	}
 		
-	
-	
-	public void analisaMsgRecebida(Mensagem mensagem)
-	{
-		
-	}
-	
-	//-----------------------------------------------------------------------------
-	//testes
-	//-----------------------------------------------------------------------------
 	public void venceu()
 	{
 		Som.tocar("UmMilhao.wav");
@@ -115,7 +109,7 @@ public class Jogo implements Serializable
 	}
 	
 	
-	public static void main(String args[])
+	/*public static void main(String args[])
 	{
 		Jogo j = new Jogo("vini", "127.0.0.1");
 		
@@ -169,10 +163,10 @@ public class Jogo implements Serializable
 			else
 				j.venceu();
 			
-			/*   - Acertar: ValorPergunta
-				   - Parar: ValorPerguntaAnterior
-				   - Errar: ValorPerguntaAnterior/2
-		    */
+			// - Acertar: ValorPergunta
+			// - Parar: ValorPerguntaAnterior
+			// - Errar: ValorPerguntaAnterior/2
+		    
 			
 			valorAcertar = Math.pow(10, Math.ceil(nrPergunta / 5) + 2) * (   Math.ceil(nrPergunta / 5)           );
 			valorParar	 = Math.pow(10, Math.ceil(nrPergunta / 5) + 2) * (   Math.ceil(nrPergunta / 5) - 1       );
@@ -206,5 +200,5 @@ public class Jogo implements Serializable
 				j.perdeu();
 			}
 		}
-	}
+	}*/
 }
