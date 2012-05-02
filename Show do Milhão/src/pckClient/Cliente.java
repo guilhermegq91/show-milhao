@@ -15,6 +15,7 @@ public class Cliente extends frmClient{
 
 	public static void main(String args[])
 	{
+		// Prepara novo cliente
 		Cliente cl = new Cliente();
 		
         /* Set the Nimbus look and feel */
