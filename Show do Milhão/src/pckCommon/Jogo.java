@@ -23,15 +23,18 @@ public class Jogo implements Serializable
 		this.vlrUltPergunta = 0;
 	}
 	
-	public String getNomeJogador() {
+	public String getNomeJogador()
+	{
 		return nomeJogador;
 	}
 
-	public void setNomeJogador(String nomeJogador) {
+	public void setNomeJogador(String nomeJogador)
+	{
 		this.nomeJogador = nomeJogador;
 	}
 
-	public String getIpJogador() {
+	public String getIpJogador()
+	{
 		return ipJogador;
 	}
 

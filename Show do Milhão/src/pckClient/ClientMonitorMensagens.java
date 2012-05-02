@@ -41,5 +41,4 @@ public class ClientMonitorMensagens implements Runnable
 		
 		catch(Exception e) { JOptionPane.showMessageDialog(null, e, "Erro", JOptionPane.WARNING_MESSAGE); }
 	}
-
 }

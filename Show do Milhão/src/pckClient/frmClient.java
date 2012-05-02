@@ -28,7 +28,6 @@ public class frmClient extends javax.swing.JFrame
 	// Pacote mensagem
 	private Mensagem m; 
 	
-	private javax.swing.JButton btnPular;
     private javax.swing.JButton btnResponder;
     private javax.swing.ButtonGroup buttonGroupOpcoes;
     private javax.swing.JLabel jLabel1;
@@ -59,7 +58,6 @@ public class frmClient extends javax.swing.JFrame
     {
         initComponents();
         btnResponder.hide();
-        btnPular.hide();
         rbtOpcao1.hide();
         rbtOpcao2.hide();
         rbtOpcao3.hide();
@@ -71,7 +69,7 @@ public class frmClient extends javax.swing.JFrame
         lblPergunta.hide();
     }
 
-    //Inicializa componentes do form
+    // Inicializa componentes do form
     @SuppressWarnings("unchecked")
     private void initComponents()
     {
@@ -92,7 +90,6 @@ public class frmClient extends javax.swing.JFrame
         jLabel4 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         btnResponder = new javax.swing.JButton();
-        btnPular = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuArquivo = new javax.swing.JMenu();
         jMenuItemNovoJogo = new javax.swing.JMenuItem();
@@ -102,7 +99,7 @@ public class frmClient extends javax.swing.JFrame
         jMenuItemSobre = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Show do Milhï¿½o - Client");
+        setTitle("Show do Milhão - Client");
         setForeground(new java.awt.Color(255, 255, 51));
         setName("frmClient"); // NOI18N
         setResizable(false);
@@ -119,7 +116,7 @@ public class frmClient extends javax.swing.JFrame
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12));
         jLabel1.setForeground(new java.awt.Color(0, 0, 204));
-        jLabel1.setText("SHOW DO MILHï¿½O");
+        jLabel1.setText("SHOW DO MILHÃO");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -260,14 +257,6 @@ public class frmClient extends javax.swing.JFrame
             }
         });
 
-        btnPular.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	btnPularActionPerformed(evt);
-            }
-        });
-        
-        btnPular.setText("Pular");
-
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -275,16 +264,13 @@ public class frmClient extends javax.swing.JFrame
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(75, 75, 75)
                 .addComponent(btnResponder, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnPular, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addGap(18, 18, 18))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPular, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnResponder, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -431,40 +417,40 @@ public class frmClient extends javax.swing.JFrame
 		String x = javax.swing.JOptionPane.showInputDialog("Informe o IP do servidor");
 		
 		// Verifica se foi informado alguma coisa
-		if (x != null) {
-			
+		if (x != null)
+		{	
 			// Conecta com o servidor
-			try {
+			try
+			{
 				Socket c = new Socket(x, 6789);
 				clienteOut = c;
-			} catch (Exception e) { System.out.println("Erro (1): " + e); }
-		} else {
+			} 
 			
-			// Mensagem de erro
-			JOptionPane.showMessageDialog( null, "Informe um IP para iniciar"
-					                     , "Sobre", JOptionPane.INFORMATION_MESSAGE);
-		}
+			catch (Exception e) { System.out.println("Erro (1): " + e); }
+		} 
+		
+		// Mensagem de erro
+		else		
+			JOptionPane.showMessageDialog( null, "Informe um IP para iniciar", "Sobre", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
-	/**
-	 * Recebe uma mensagem vinda do servidor e realiza
-	 * as operaÃ§Ã£os de acordo com o objeto enviado 
-	 * @return void
-	 */
+	/* Recebe uma mensagem vinda do servidor e realiza
+	 * as operações de acordo com o objeto enviado */
 	public void trataRetorno()
 	{
 		// Recebe mensagem
-		try {
+		try
+		{
 	        m = (Mensagem) in.readObject();
-		} catch (Exception e) { System.out.println(e); }
+		} 
+		
+		catch (Exception e) { System.out.println(e); }
 
 		// Verfica se eh uma pergunta
 		if (m.getObj() instanceof Pergunta)
 		{
-
 			// Manipula a tela 
 			btnResponder.show();
-	        btnPular.show();
 	        rbtOpcao1.show();
 	        rbtOpcao1.setSelected(false);
 	        rbtOpcao2.show();
@@ -522,23 +508,25 @@ public class frmClient extends javax.swing.JFrame
 							    "  Acertar: R$ " + p.getValorAcertar());
 
 		} 
-		// Nao eh Pergunta, apenas informacao[Errada]
+		
+		// Não é Pergunta, apenas informacao [Errada]
 		else if (m.getMsg().equals("Errada")) 
 		{
-			lblMensagem.setText("Vocï¿½ perdeu.");
+			lblMensagem.setText("Você perdeu.");
 			Som.tocar("RespostaErrada.wav");
 			Som.tocar("Fim.wav");
 			
 			btnResponder.hide();
-	        btnPular.hide();
 		}
-		// Nao eh Pergunta, apenas informacao[Certa]
+		
+		// Não é Pergunta, apenas informacao [Certa]
 		else if (m.getMsg().equals("Certa"))
 		{
 			Som.tocar("RespostaCerta.wav");
 			trataRetorno();
 		}
-		// Nao eh Pergunta, apenas informacao[Ganhou]
+		
+		// Não é Pergunta, apenas informacao [Ganhou]
 		else if (m.getMsg().equals("Ganhou"))
 		{
 			Som.tocar("UmMilhao.wav");
@@ -566,6 +554,7 @@ public class frmClient extends javax.swing.JFrame
 		else
 		{
 			JOptionPane.showMessageDialog(null,"Escolha uma opï¿½ï¿½o","Escolha",JOptionPane.INFORMATION_MESSAGE);
+			
 			return false;
 		}
 	
