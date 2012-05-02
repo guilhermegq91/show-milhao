@@ -400,7 +400,7 @@ public class frmClient extends javax.swing.JFrame
 	        output.writeObject(m);
 	        output.flush();
 
-	        // Cria um server socket para receber conexão
+	        // Cria um server socket para receber conexï¿½o
 	        ServerSocket servidor = new ServerSocket(6777);
 	        clienteIn = servidor.accept();
 	        
@@ -496,7 +496,7 @@ public class frmClient extends javax.swing.JFrame
 		
 		else if (m.getMsg().equals("Errada"))
 		{
-			lblMensagem.setText("Você perdeu.");
+			lblMensagem.setText("Vocï¿½ perdeu.");
 			Som.tocar("RespostaErrada.wav");
 			Som.tocar("Fim.wav");
 			
@@ -537,7 +537,7 @@ public class frmClient extends javax.swing.JFrame
 			
 			else
 			{
-				JOptionPane.showMessageDialog(null,"Escolha uma opção","Escolha",JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null,"Escolha uma opï¿½ï¿½o","Escolha",JOptionPane.INFORMATION_MESSAGE);
 				return false;
 			}
 		} 
