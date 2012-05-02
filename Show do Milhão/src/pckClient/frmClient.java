@@ -100,7 +100,7 @@ public class frmClient extends javax.swing.JFrame
         jMenuItemSobre = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Show do Milhão - Client");
+        setTitle("Show do Milhï¿½o - Client");
         setForeground(new java.awt.Color(255, 255, 51));
         setName("frmClient"); // NOI18N
         setResizable(false);
@@ -117,7 +117,7 @@ public class frmClient extends javax.swing.JFrame
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12));
         jLabel1.setForeground(new java.awt.Color(0, 0, 204));
-        jLabel1.setText("SHOW DO MILHÃO");
+        jLabel1.setText("SHOW DO MILHï¿½O");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -396,6 +396,9 @@ public class frmClient extends javax.swing.JFrame
 	        ServerSocket servidor = new ServerSocket(6790);
 	        clienteIn = servidor.accept();
 	        
+	        // Fecha o servidor
+	        servidor.close();
+	        
 	        // Salva stream de dados
 	        in = new ObjectInputStream(clienteIn.getInputStream());	        
 	        
@@ -414,10 +417,17 @@ public class frmClient extends javax.swing.JFrame
 		
 		// Verifica se foi informado alguma coisa
 		if (x != null)
-		{	
+		{
+
 			// Conecta com o servidor
 			try
 			{
+				// Fecha todas conexÃµes ativas para abrir novas
+				if (in  != null) in.close();
+				if (out != null) out.close();
+				if (clienteIn != null) clienteIn.close();
+				if (clienteOut != null) clienteOut.close(); 
+				
 				clienteOut = new Socket(x, 6789);
 			}
 			
@@ -430,7 +440,7 @@ public class frmClient extends javax.swing.JFrame
 	}
 	
 	/* Recebe uma mensagem vinda do servidor e realiza
-	 * as operações de acordo com o objeto enviado */
+	 * as operaï¿½ï¿½es de acordo com o objeto enviado */
 	public void trataRetorno()
 	{
 		// Recebe mensagem
@@ -504,24 +514,24 @@ public class frmClient extends javax.swing.JFrame
 
 		} 
 		
-		// Não é Pergunta, apenas informacao [Errada]
+		// Nï¿½o ï¿½ Pergunta, apenas informacao [Errada]
 		else if (m.getMsg().equals("Errada")) 
 		{
-			lblMensagem.setText("Você perdeu.");
+			lblMensagem.setText("Vocï¿½ perdeu.");
 			Som.tocar("RespostaErrada.wav");
 			Som.tocar("Fim.wav");
 			
 			btnResponder.hide();
 		}
 		
-		// Não é Pergunta, apenas informacao [Certa]
+		// Nï¿½o ï¿½ Pergunta, apenas informacao [Certa]
 		else if (m.getMsg().equals("Certa"))
 		{
 			Som.tocar("RespostaCerta.wav");
 			trataRetorno();
 		}
 		
-		// Não é Pergunta, apenas informacao [Ganhou]
+		// Nï¿½o ï¿½ Pergunta, apenas informacao [Ganhou]
 		else if (m.getMsg().equals("Ganhou"))
 		{
 			Som.tocar("UmMilhao.wav");
@@ -568,7 +578,7 @@ public class frmClient extends javax.swing.JFrame
 			out.flush();
     	}
 		
-		catch (Exception e) { System.out.println("Erro (2): " + e); }
+		catch (Exception e) { System.out.println("Erro (3): " + e); }
 		
 		// Prepara para receber os dados
 		trataRetorno();
