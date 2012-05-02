@@ -37,7 +37,8 @@ public class Jogo implements Serializable
 		return ipJogador;
 	}
 
-	public void setIpJogador(String ipJogador) {
+	public void setIpJogador(String ipJogador)
+	{
 		this.ipJogador = ipJogador;
 	}
 
@@ -45,49 +46,74 @@ public class Jogo implements Serializable
 	{	
 		double valorAcertar, valorParar, valorErrar;
 		contPerguntas++;
-
-		Pergunta p = perguntas.sorteiaPergunta(NivelPergunta.FACIL);
 		
-		valorAcertar = this.getValorAcertar(contPerguntas);
-		valorParar	 = this.getValorAcertar(contPerguntas-1);
+		Pergunta p = null;
+		if (contPerguntas <= 5)
+			p = perguntas.sorteiaPergunta(NivelPergunta.FACIL);
+		else if (contPerguntas <= 10)
+			p = perguntas.sorteiaPergunta(NivelPergunta.MEDIO);
+		else
+			p = perguntas.sorteiaPergunta(NivelPergunta.DIFICIL);
+		
+		valorAcertar = this.getValorPergunta(contPerguntas);
+		
+		valorParar	 = this.getValorPergunta(contPerguntas - 1);
 		valorParar   = ( valorParar < 0 ) ? 0 : valorParar;
-		valorErrar	 = this.getValorAcertar(contPerguntas-1);
+		
+		valorErrar	 = this.getValorPergunta(contPerguntas - 1) / 2;
 		valorErrar	 = ( valorParar < 0 ) ? 0 : valorErrar;
 
 		p.setContPergunta(contPerguntas);
 		p.setValorAcertar(valorAcertar);
 		p.setValorErrar(valorErrar);
 		p.setValorParar(valorParar);
+		
 		return p;		
 	}
 	
-	public double getValorAcertar(int pergunta)
+	public double getValorPergunta(int pergunta)
 	{
 		double valor = 0;
 		
-		if (pergunta == 1) valor = 1000;
-		else if (pergunta == 2) valor = 2000;
-		else if (pergunta == 3) valor = 3000;
-		else if (pergunta == 4) valor = 4000;
-		else if (pergunta == 5) valor = 5000;
-		
-		// Segunda rodada
-		else if (pergunta == 6) valor = 10000;
-		else if (pergunta == 7) valor = 20000;
-		else if (pergunta == 8) valor = 30000;
-		else if (pergunta == 9) valor = 40000;
-		else if (pergunta == 10) valor = 50000;
-		
-		// Terceira rodada
-		else if (pergunta == 11) valor = 100000;
-		else if (pergunta == 12) valor = 200000;
-		else if (pergunta == 13) valor = 300000;
-		else if (pergunta == 14) valor = 400000;
-		else if (pergunta == 15) valor = 500000;
-		
-		// Final
-		else if (pergunta == 16) valor = 1000000;
-		
+        if (pergunta == 1) 
+        	valor = 1000;
+        else if (pergunta == 2) 
+        	valor = 2000;
+        else if (pergunta == 3) 
+        	valor = 3000;
+        else if (pergunta == 4) 
+        	valor = 4000;
+        else if (pergunta == 5) 
+        	valor = 5000;
+        
+        // Segunda rodada
+        else if (pergunta == 6) 
+        	valor = 10000;
+        else if (pergunta == 7) 
+        	valor = 20000;
+        else if (pergunta == 8) 
+        	valor = 30000;
+        else if (pergunta == 9) 
+        	valor = 40000;
+        else if (pergunta == 10) 
+        	valor = 50000;
+        
+        // Terceira rodada
+        else if (pergunta == 11) 
+        	valor = 100000;
+        else if (pergunta == 12) 
+        	valor = 200000;
+        else if (pergunta == 13) 
+        	valor = 300000;
+        else if (pergunta == 14) 
+        	valor = 400000;
+        else if (pergunta == 15) 
+        	valor = 500000;
+        
+        // Final
+        else if (pergunta == 16) 
+        	valor = 1000000;
+
 		return valor;
 	}
 		
