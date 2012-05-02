@@ -26,8 +26,6 @@ public class ControlaCliente implements Runnable {
 	
 	public void run() {
 		
-		
-		
 		// Controla o Jogo
 		try {
 			
