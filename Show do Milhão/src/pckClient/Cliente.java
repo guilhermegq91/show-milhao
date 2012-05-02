@@ -11,18 +11,8 @@ import pckCommon.*;
 
 public class Cliente extends frmClient{
 	
-	public Cliente(){
+	public Cliente(){ }
 
-	}
-
-	/*
-	 * Envia uma resposta genérica
-	 */
-	public boolean enviaResposta() {
-		
-		return true;
-	}
-	
 	public static void main(String args[])
 	{
 		Cliente cl = new Cliente();
