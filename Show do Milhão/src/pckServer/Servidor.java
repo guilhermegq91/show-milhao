@@ -10,8 +10,6 @@ public class Servidor {
 		new Servidor(6789).start();
 	}
 	
-	private int porta; // Porta onde o servidor escutara
-	
 	public Servidor (int porta) {
 		// Porta que o servidor vai escutar
 		this.porta = porta;

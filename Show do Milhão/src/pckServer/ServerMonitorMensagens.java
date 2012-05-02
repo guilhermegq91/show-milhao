@@ -9,7 +9,8 @@ import javax.swing.JOptionPane;
 import pckClient.Cliente;
 import pckCommon.Mensagem;
 
-public class ServerMonitorMensagens implements Runnable  {
+public class ServerMonitorMensagens implements Runnable {
+	
 	private Servidor serv;
 	private ServerSocket socketRecepcao;
 	private Socket socketConexao;
