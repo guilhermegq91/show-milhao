@@ -93,7 +93,7 @@ public class frmClient extends javax.swing.JFrame
         jMenuItemSobre = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Show do Milhï¿½o - Client");
+        setTitle("Show do Milhão - Client");
         setForeground(new java.awt.Color(255, 255, 51));
         setName("frmClient"); // NOI18N
         setResizable(false);
@@ -110,7 +110,7 @@ public class frmClient extends javax.swing.JFrame
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12));
         jLabel1.setForeground(new java.awt.Color(0, 0, 204));
-        jLabel1.setText("SHOW DO MILHï¿½O");
+        jLabel1.setText("SHOW DO MILHÃO");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -367,7 +367,7 @@ public class frmClient extends javax.swing.JFrame
 
     private void jMenuItemSobreActionPerformed(java.awt.event.ActionEvent evt)
     {
-        JOptionPane.showMessageDialog(null, "Gustavo Togni\n Leonardo de Paula\n Vinicius Ville", "Sobre", JOptionPane.INFORMATION_MESSAGE);        
+        JOptionPane.showMessageDialog(null, "Gustavo Togni\n Leonardo dos Santos Paula\n Vinicius Ville", "Sobre", JOptionPane.INFORMATION_MESSAGE);        
     }
     
     private void btnResponderActionPerformed(java.awt.event.ActionEvent evt)
