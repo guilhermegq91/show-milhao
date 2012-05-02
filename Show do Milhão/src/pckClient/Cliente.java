@@ -3,15 +3,44 @@ package pckClient;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import pckCommon.*;
+import javax.swing.JOptionPane;
+
+import pckCommon.Mensagem;
+import pckCommon.NivelPergunta;
+import pckCommon.OpcaoPergunta;
+import pckCommon.Pergunta;
 
 
 public class Cliente {
 	
-	private Socket cliente;
-	private Resposta resp = null;
+	private frmClient frameClient;
+	private Socket conexSendMsgServer;
+	private ClientMonitorMensagens clientMonitor;
+	private ObjectOutputStream output;
+	private Socket socketClient;
 	
 	public Cliente(){
+        configura();
+		frameClient = new frmClient((Cliente)this);	
+		//cria thread que vai monitorar msgs recebidas do servidor
+		this.clientMonitor = new ClientMonitorMensagens((Cliente)this);
+		Thread threadMonServ = new Thread(clientMonitor);
+		threadMonServ.start();
+		//cria socket que vai enviar mensagens para o servidor
+		try{
+			socketClient = new Socket("127.0.0.1", 6789);
+			output = new ObjectOutputStream(socketClient.getOutputStream());
+			//exibe form
+			frameClient.setVisible(true);
+		}
+		catch(Exception e){
+			JOptionPane.showMessageDialog(null, e, "Erro", JOptionPane.WARNING_MESSAGE);	
+		}
+		 
+    }
+	
+	private void configura()
+	{
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -33,64 +62,39 @@ public class Cliente {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(frmClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-
-            public void run() {
-                new frmClient().setVisible(true);
-            }
-        });		
-		resp = new Resposta("START", 0, 0, 0);
 	}
 	
-	/*
-	 * Conecta com o servidor
-	 */
-	public void conectaSocket() {
-		try {
-			Socket c = new Socket("127.0.0.1", 6789);
-			cliente = c;
-			
-		}catch (Exception e) {
-			System.out.println("Erro (1): " + e);
-		}
+	public void enviaMensagem(Mensagem mensagem)
+	{
+		try{
+			output.flush();
+			output.writeObject(mensagem);
+			output.flush();
+        }
+        catch(Exception e){
+        	JOptionPane.showMessageDialog(null, e, "Erro", JOptionPane.WARNING_MESSAGE);
+        }
 	}
-	
+	public frmClient getFrameCl(){
+		return frameClient;
+	}
 	/*
 	 * Envia pacote "start" para o sincronizar novo jogo com o servidor
 	 */
-	public boolean iniciaJogo() {
-		conectaSocket();
-		
-		ObjectOutputStream output;
-		
-		try {
-			output = new ObjectOutputStream(cliente.getOutputStream());
-			
-			output.flush();
-	        output.writeObject(resp);
-	        output.flush();
-	        output.close();
-	        
-		}catch (Exception e) {
-			System.out.println("Erro (2): " + e);
-		}
-		return true;
-	}
-
-	/*
-	 * Envia uma resposta genérica
-	 */
-	public boolean enviaResposta() {
-		
-		return true;
-	}
-	
 	public static void main(String args[])
 	{
+		OpcaoPergunta[] op = new OpcaoPergunta[4];
+    	op[0] = new OpcaoPergunta(0, "opcao da perg 1", true);
+    	
+    	op[1] = new OpcaoPergunta(1, "opcao da perg 2", false);
+
+    	op[2] = new OpcaoPergunta(2, "opcao da perg 3", false);
+
+    	op[3] = new OpcaoPergunta(3, "opcao da perg 4", false);
+    	
+    	Pergunta p = new Pergunta("Pergunta de teste", 1, "Qual o nome?", op, NivelPergunta.FACIL);
+    	
 		Cliente cl = new Cliente();
-	}
-	
+		cl.getFrameCl().exibePergunta(p);
+	}	
 }

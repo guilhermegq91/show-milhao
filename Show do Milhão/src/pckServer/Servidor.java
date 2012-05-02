@@ -20,7 +20,6 @@ public class Servidor {
 	public void start() {
 		
 		try {
-
 			ServerSocket servidor = new ServerSocket(this.porta);
 			System.out.println("Servidor escutando na porta:" + this.porta);
 			

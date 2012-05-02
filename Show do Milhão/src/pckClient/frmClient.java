@@ -12,6 +12,10 @@ package pckClient;
 
 import javax.swing.JOptionPane;
 
+import pckCommon.Mensagem;
+import pckCommon.Pergunta;
+import pckCommon.Resposta;
+
 /**
  *
  * @author Vinicius
@@ -19,8 +23,10 @@ import javax.swing.JOptionPane;
 public class frmClient extends javax.swing.JFrame {
 
     /** Creates new form frmClient */
-    public frmClient() {
-        initComponents();
+    public frmClient(Cliente cl) {
+        this.cl = cl;
+    	initComponents();
+    	limpaFrame();
     }
 
     /** This method is called from within the constructor to
@@ -336,15 +342,76 @@ public class frmClient extends javax.swing.JFrame {
     private void jMenuItemNovoJogoActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         // Inicia um novo Jogo
-        Cliente c = new Cliente();
-        c.iniciaJogo();        
+           
     }
+    
+    private void btnResponderActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    	int id_opcao = 0;
+    	if(rbtOpcao1.isSelected())
+    		id_opcao = 0;
+    	else if(rbtOpcao2.isSelected())
+    		id_opcao = 1;
+    	else if(rbtOpcao3.isSelected())
+    		id_opcao = 2;
+    	else if(rbtOpcao4.isSelected())
+    		id_opcao = 3;
+    	
+    	Resposta r = new Resposta("", 0, ultimaPergunta.getId(), id_opcao);
+    	Mensagem msg = new Mensagem(r, "");
+    	this.enviaMensagemServer(msg);
+    }    
 
+    public void exibePergunta(Pergunta pergunta)
+    {
+    	lblMensagem.setText(pergunta.getMsg());
+    	lblPergunta.setText(pergunta.getDescricao());
+    	rbtOpcao1.setText(pergunta.getOpcoes()[0].getDescricao());
+    	rbtOpcao2.setText(pergunta.getOpcoes()[1].getDescricao());
+    	rbtOpcao3.setText(pergunta.getOpcoes()[2].getDescricao());
+    	rbtOpcao4.setText(pergunta.getOpcoes()[3].getDescricao());
+    	ultimaPergunta = pergunta;
+    	Som.tocar(pergunta.getValorAcertar() + ".wav");
+    }
+    
+    private void enviaMensagemServer(Mensagem mensagem){
+    	cl.enviaMensagem(mensagem);
+    	limpaFrame();
+    }
+    
+    public void limpaFrame()
+    {
+    	lblMensagem.setText("");
+    	lblPergunta.setText("");
+    	rbtOpcao1.setText("");
+    	rbtOpcao2.setText("");
+    	rbtOpcao3.setText("");
+    	rbtOpcao4.setText("");
+    	ultimaPergunta = null;
+    }
+    
     /**
      * @param args the command line arguments
      */
     /*
     public static void main(String args[]) {
+    	OpcaoPergunta[] op = new OpcaoPergunta[4];
+    	op[0].setDescricao("opcao da perg 1");
+    	op[0].setId(0);
+    	op[0].setVerdadeira(true);
+    	
+    	op[1].setDescricao("opcao da perg 2");
+    	op[1].setId(1);
+    	op[1].setVerdadeira(false);
+    	
+    	op[2].setDescricao("opcao da perg 3");
+    	op[2].setId(2);
+    	op[2].setVerdadeira(false);
+    	
+    	op[3].setDescricao("opcao da perg 4");
+    	op[3].setId(3);
+    	op[3].setVerdadeira(false);
+    	Pergunta p = new Pergunta("Pergunta de teste", 1, "Qual o nome?", op, NivelPergunta.FACIL);      
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -365,7 +432,9 @@ public class frmClient extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new frmClient().setVisible(true);
+            	frmClient f = new frmClient(null);
+            	f.setVisible(true);
+            	f.exibePergunta(p);
             }
         });
     }*/
@@ -395,5 +464,7 @@ public class frmClient extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbtOpcao2;
     private javax.swing.JRadioButton rbtOpcao3;
     private javax.swing.JRadioButton rbtOpcao4;
+    private Cliente cl;
+    private Pergunta ultimaPergunta;
     // End of variables declaration
 }
