@@ -1,5 +1,6 @@
 package pckClient;
 
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
@@ -12,7 +13,7 @@ import pckCommon.Pergunta;
 import pckCommon.Resposta;
 
 public class frmClient extends javax.swing.JFrame
-{
+{	
 	// Socket que recebe dados
 	private Socket clienteIn;
 
@@ -369,11 +370,6 @@ public class frmClient extends javax.swing.JFrame
     {
     	enviaResposta("resposta");
     }
-    
-    private void btnPularActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    	enviaResposta("Pulo");
-    }
 
     private void jMenuItemNovoJogoActionPerformed(java.awt.event.ActionEvent evt)
     {
@@ -394,15 +390,15 @@ public class frmClient extends javax.swing.JFrame
 			
 			output.flush();
 	        output.writeObject(m);
-	        output.flush();
-
+	        output.flush();	        
+	  
 	        // Aguarda retorno do servidor
-	        ServerSocket servidor = new ServerSocket(6777);
+	        ServerSocket servidor = new ServerSocket(6790);
 	        clienteIn = servidor.accept();
 	        
 	        // Salva stream de dados
 	        in = new ObjectInputStream(clienteIn.getInputStream());	        
-
+	        
 	        // Trata os dados recebidos
 	        trataRetorno();
 		}
@@ -422,9 +418,8 @@ public class frmClient extends javax.swing.JFrame
 			// Conecta com o servidor
 			try
 			{
-				Socket c = new Socket(x, 6789);
-				clienteOut = c;
-			} 
+				clienteOut = new Socket(x, 6789);
+			}
 			
 			catch (Exception e) { System.out.println("Erro (1): " + e); }
 		} 

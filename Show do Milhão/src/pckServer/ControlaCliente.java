@@ -55,7 +55,7 @@ public class ControlaCliente implements Runnable
 	        	
 	        	// Transmite proxima pergunta para o jogador (salva socket)
 	        	Socket c = new Socket(clienteIn.getInetAddress().getHostAddress()
-	        			             , 6777);
+	        			             , 6790);
 	        	clienteOut = c;
 	        	
 	        	// Sorteia proxima pergunta

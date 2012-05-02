@@ -24,7 +24,7 @@ public class Servidor
 		try
 		{
 			ServerSocket servidor = new ServerSocket(this.porta);
-			System.out.println("Servidor escutando na porta:" + this.porta);
+			System.out.println("Servidor escutando na porta: " + this.porta);
 			
 			// Loop infinito aguardando conexoes...
 			while(true)
