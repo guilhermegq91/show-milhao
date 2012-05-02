@@ -13,11 +13,20 @@ import pckCommon.Resposta;
 
 public class frmClient extends javax.swing.JFrame
 {
+	// Socket que recebe dados
 	private Socket clienteIn;
+
+	// Stream de entrada
 	private ObjectInputStream in;
+	
+	// Stream de saida
 	private ObjectOutputStream out;
+	
+	// Socket que envia dados
 	private Socket clienteOut;
-	private Mensagem m;
+	
+	// Pacote mensagem
+	private Mensagem m; 
 	
 	private javax.swing.JButton btnPular;
     private javax.swing.JButton btnResponder;
@@ -93,7 +102,7 @@ public class frmClient extends javax.swing.JFrame
         jMenuItemSobre = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Show do Milhão - Client");
+        setTitle("Show do Milhï¿½o - Client");
         setForeground(new java.awt.Color(255, 255, 51));
         setName("frmClient"); // NOI18N
         setResizable(false);
@@ -110,7 +119,7 @@ public class frmClient extends javax.swing.JFrame
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12));
         jLabel1.setForeground(new java.awt.Color(0, 0, 204));
-        jLabel1.setText("SHOW DO MILHÃO");
+        jLabel1.setText("SHOW DO MILHï¿½O");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -387,25 +396,28 @@ public class frmClient extends javax.swing.JFrame
         
         conectaSocket();
 		
+        // Monta pacote com a primeira mensagem
 		m = new Mensagem("inicia", "Jogador");
 
 		ObjectOutputStream output;
 		
 		try
 		{
-			// Envia mensagem para o servidor
+			// Envia mensagem para o servidor iniciar
 			output = new ObjectOutputStream(clienteOut.getOutputStream());
 			
 			output.flush();
 	        output.writeObject(m);
 	        output.flush();
 
-	        // Cria um server socket para receber conexï¿½o
+	        // Aguarda retorno do servidor
 	        ServerSocket servidor = new ServerSocket(6777);
 	        clienteIn = servidor.accept();
 	        
+	        // Salva stream de dados
 	        in = new ObjectInputStream(clienteIn.getInputStream());	        
 
+	        // Trata os dados recebidos
 	        trataRetorno();
 		}
 		
@@ -415,28 +427,42 @@ public class frmClient extends javax.swing.JFrame
     // Conecta com o servidor
 	public void conectaSocket()
 	{
-		try
-		{
-			String x = javax.swing.JOptionPane.showInputDialog("Informe o IP do servidor"); 
-			Socket c = new Socket(x, 6789);
-			clienteOut = c;
-			
-		}
+		// Solicita IP do servidor
+		String x = javax.swing.JOptionPane.showInputDialog("Informe o IP do servidor");
 		
-		catch (Exception e) { System.out.println("Erro (1): " + e); }
+		// Verifica se foi informado alguma coisa
+		if (x != null) {
+			
+			// Conecta com o servidor
+			try {
+				Socket c = new Socket(x, 6789);
+				clienteOut = c;
+			} catch (Exception e) { System.out.println("Erro (1): " + e); }
+		} else {
+			
+			// Mensagem de erro
+			JOptionPane.showMessageDialog( null, "Informe um IP para iniciar"
+					                     , "Sobre", JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 	
+	/**
+	 * Recebe uma mensagem vinda do servidor e realiza
+	 * as operaÃ§Ã£os de acordo com o objeto enviado 
+	 * @return void
+	 */
 	public void trataRetorno()
 	{
-		try
-		{
+		// Recebe mensagem
+		try {
 	        m = (Mensagem) in.readObject();
-		}
-		
-		catch (Exception e) { System.out.println(e); }
-		
+		} catch (Exception e) { System.out.println(e); }
+
+		// Verfica se eh uma pergunta
 		if (m.getObj() instanceof Pergunta)
 		{
+
+			// Manipula a tela 
 			btnResponder.show();
 	        btnPular.show();
 	        rbtOpcao1.show();
@@ -452,9 +478,11 @@ public class frmClient extends javax.swing.JFrame
 	        jLabel5.show();
 	        lblMensagem.show();
 	        lblPergunta.show();
-
+	        
+	        // Converte o objeto da mensagem para pergunta
 			Pergunta p = (Pergunta) m.getObj();
 			
+			// Verifica a logica do jogo para os sons
 			if (p.getContPergunta() <= 5)
 			{
 				if (p.getContPergunta() == 1) 
@@ -482,6 +510,7 @@ public class frmClient extends javax.swing.JFrame
 					Som.tocar("Question/" + (int)p.getValorAcertar() + ".wav");
 			} 
 			
+			// Exibe na tela as informacoes
 			lblPergunta.setText(p.getDescricao());
 			
 			rbtOpcao1.setText( p.getOpcoes()[0].getDescricao() );
@@ -493,8 +522,8 @@ public class frmClient extends javax.swing.JFrame
 							    "  Acertar: R$ " + p.getValorAcertar());
 
 		} 
-		
-		else if (m.getMsg().equals("Errada"))
+		// Nao eh Pergunta, apenas informacao[Errada]
+		else if (m.getMsg().equals("Errada")) 
 		{
 			lblMensagem.setText("Vocï¿½ perdeu.");
 			Som.tocar("RespostaErrada.wav");
@@ -503,13 +532,13 @@ public class frmClient extends javax.swing.JFrame
 			btnResponder.hide();
 	        btnPular.hide();
 		}
-		
+		// Nao eh Pergunta, apenas informacao[Certa]
 		else if (m.getMsg().equals("Certa"))
 		{
 			Som.tocar("RespostaCerta.wav");
 			trataRetorno();
 		}
-		
+		// Nao eh Pergunta, apenas informacao[Ganhou]
 		else if (m.getMsg().equals("Ganhou"))
 		{
 			Som.tocar("UmMilhao.wav");
@@ -521,34 +550,32 @@ public class frmClient extends javax.swing.JFrame
 	{	
 		int opt;
 		
-		if (!msg.equals("Pulo"))
+		// Verifica opcao escolhida
+		if (rbtOpcao1.isSelected())
+			opt = 0; 
+		
+		else if (rbtOpcao2.isSelected())
+			opt = 1;
+		
+		else if (rbtOpcao3.isSelected())
+			opt = 2;
+		
+		else if (rbtOpcao4.isSelected())
+			opt = 3;
+		
+		else
 		{
-			if (rbtOpcao1.isSelected())
-				opt = 0; 
-			
-			else if (rbtOpcao2.isSelected())
-				opt = 1;
-			
-			else if (rbtOpcao3.isSelected())
-				opt = 2;
-			
-			else if (rbtOpcao4.isSelected())
-				opt = 3;
-			
-			else
-			{
-				JOptionPane.showMessageDialog(null,"Escolha uma opï¿½ï¿½o","Escolha",JOptionPane.INFORMATION_MESSAGE);
-				return false;
-			}
-		} 
-		
-		else 
-			opt = 5;
-		
+			JOptionPane.showMessageDialog(null,"Escolha uma opï¿½ï¿½o","Escolha",JOptionPane.INFORMATION_MESSAGE);
+			return false;
+		}
+	
+		// Monta resposta
 		Resposta r = new Resposta(msg, opt);
 		
+		// Empacota resposta
 		m = new Mensagem(r, msg);
 		
+		// Envia mensagem para o servidor
 		try
 		{
 			out = new ObjectOutputStream(clienteOut.getOutputStream());
@@ -559,6 +586,7 @@ public class frmClient extends javax.swing.JFrame
 		
 		catch (Exception e) { System.out.println("Erro (2): " + e); }
 		
+		// Prepara para receber os dados
 		trataRetorno();
 		return true;
 	}
