@@ -20,7 +20,7 @@ public class ClientMonitorMensagens implements Runnable {
 	public ClientMonitorMensagens(Cliente cl){
 		this.cl = cl;
 		try{
-			this.socketRecepcao = new ServerSocket(6788);
+			this.socketRecepcao = new ServerSocket(6789);
 			this.socketConexao = socketRecepcao.accept();
 			this.input = new ObjectInputStream(socketConexao.getInputStream());
 		}
